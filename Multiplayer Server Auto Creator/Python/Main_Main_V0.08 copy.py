@@ -8,7 +8,7 @@ import subprocess
 import requests
 import threading
 import shutil
-from py7zr import unpack_7zarchive 
+#from py7zr import unpack_7zarchive 
 
 
 # Window setup
@@ -162,6 +162,21 @@ def Apache_Stop(process, button):
         if process.name() == "httpd.exe":
             # Finaliza el proceso
             process.kill()
+
+
+
+
+
+def Filezilla_Start():
+Filezilla_Start_EXE =(C:/xampp/)
+  Button_Filezilla = ctk.CTkButton(sidebar_panel2, text='Stop Apache', command=lambda: (Apache_Stop(process, Button_Apache)))
+    Button_Apache.pack(expand=True, fill='both', padx=5, pady=5)
+
+    cmd = f'powershell.exe Start-Process "{Apache_Start_Exe}"'  # Start Apache server
+    process = subprocess.Popen(cmd, shell=False)
+
+    # Wait for Apache server to start
+    process.wait()
 
 
 
