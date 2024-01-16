@@ -3,13 +3,13 @@ from cx_Freeze import setup, Executable
 base = None
 
 executables = [
-    Executable("Main_Main_V0.05 compilar.py", base=base, targetName="Test.exe")
+    Executable("Main_Main_V0.09.py", base=base, targetName="MSAC.exe")
 ]
 
 setup(
-    name="Test",
+    name="MSAC",
     options={"build_exe": {"include_files": [], "packages": []}},
-    version="0.2",
-    description="Test 1",
+    version="0.9",
+    description="GUI for start Apache, FilezillaFTP, Minecraft Servers ",
     executables=executables
 )
