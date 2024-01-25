@@ -32,7 +32,7 @@ def update_progress_bars():
 
 # Ip setup
 Ip_bar = ctk.CTkFrame(window)
-Ip_bar.place(relx=0.05, rely=0, relwidth=0.2, relheight=0.1)
+Ip_bar.place(relx=0.05, rely=0, relwidth=0.2, relheight=0.1) #relwidth=0.2
 
 #Funcion para coger la direccion ip publica 
 def obtener_ip_publica():
@@ -48,11 +48,11 @@ def obtener_ip_publica():
     except requests.RequestException as e:
         return f'Error de conexión: {e}'
 
-
 ip_publica = obtener_ip_publica()
 
-
 ctk.CTkLabel(Ip_bar,text=f'IP Pública: {ip_publica}').pack(expand=True, fill='both', padx=5, pady=5)
+
+
 
 
 # Sidebar setup
@@ -67,6 +67,10 @@ sidebar_panel2.place(relx=0.75, rely=0, relwidth=0.2, relheight=0.1)
 submenu_frame = ctk.CTkFrame(window)
 submenu_frame.place(relx=0.35, rely=0.2, relwidth=0.3, relheight=0.5)
 
+def actualizar_posicion(relx_nuevo, rely_nuevo):
+    sidebar_panel2.place_configure(relx=relx_nuevo, rely=rely_nuevo)
+
+
 # Buttons for sidebar
 def servers_button():
     for widget in submenu_frame.winfo_children():
@@ -78,7 +82,6 @@ def servers_button():
 def destroy_servers_button(button):
     if button:
         button.destroy()
-
 
 
 
