@@ -580,9 +580,9 @@ def Minecraft_Forge_5():
         widget.destroy()
     # Botones para submenú
     ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_4).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.11',  command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.10',  command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.9',   command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.8',  command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.7',  command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.6',   command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='Older', command=Minecraft_Forge_6).pack(expand=True, fill='both', padx=5, pady=5)
 
 def Minecraft_Forge_6():
@@ -590,9 +590,9 @@ def Minecraft_Forge_6():
         widget.destroy()
     # Botones para submenú
     ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_5).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.8', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.7', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.6', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.5', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.4', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.3', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
 
 
 
@@ -625,6 +625,8 @@ def descargar_forge_1_20_2():
 
 
 
+def Minecraft_Forge_ModPack():
+    sa
 
 
 # CPU and RAM progress bars setup
