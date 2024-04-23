@@ -231,7 +231,7 @@ def Minecraft_Vanilla_2():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
-    ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Vanilla).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Vanilla).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.17.1', command=descargar_1_17_1).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.16.5', command=descargar_1_16_5).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.15.2', command=descargar_1_15_2).pack(expand=True, fill='both', padx=5, pady=5)
@@ -241,6 +241,7 @@ def Minecraft_Vanilla_3():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
+    ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Vanilla_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.14.4', command=descargar_1_14_4).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.13.2', command=descargar_1_13_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.12.2', command=descargar_1_12_2).pack(expand=True, fill='both', padx=5, pady=5)
@@ -250,6 +251,7 @@ def Minecraft_Vanilla_4():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
+    ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Vanilla_3).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.11',  command=descargar_1_11_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.10',  command=descargar_1_10_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.9',   command=descargar_1_9_4).pack(expand=True, fill='both', padx=5, pady=5)
@@ -259,10 +261,12 @@ def Minecraft_Vanilla_5():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
+    ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Vanilla_4).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.8.9',  command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.7.10',  command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.9',   command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='Older', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
+
+
 
 def descargar_1_20_2():
     # URL del archivo a descargar
@@ -536,43 +540,46 @@ def Minecraft_Forge():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
-    ctk.CTkButton(submenu_frame, text='1.20.2', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.19.4', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.18.2', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.20.2', command=descargar_forge_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.19.4', command=descargar_1_19_4).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.18.2', command=descargar_1_18_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Forge_2).pack(expand=True, fill='both', padx=5, pady=5)
     
 def Minecraft_Forge_2():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
-    ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Vanilla).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.17.1', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.16.5', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.15.2', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.17.1', command=descargar_1_17_1).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.16.5', command=descargar_1_16_5).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.15.2', command=descargar_1_15_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Forge_3).pack(expand=True, fill='both', padx=5, pady=5)
 
 def Minecraft_Forge_3():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
-    ctk.CTkButton(submenu_frame, text='1.14.4', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.13.2', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.12.2', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.14.4', command=descargar_1_14_4).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.13.2', command=descargar_1_13_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.12.2', command=descargar_1_12_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Forge_4).pack(expand=True, fill='both', padx=5, pady=5)
 
 def Minecraft_Forge_4():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
-    ctk.CTkButton(submenu_frame, text='1.11',  command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.10',  command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.9',   command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_3).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.11',  command=descargar_1_11_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.10',  command=descargar_1_10_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.9',   command=descargar_1_9_4).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='Older', command=Minecraft_Forge_5).pack(expand=True, fill='both', padx=5, pady=5)
 
 def Minecraft_Forge_5():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
+    ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_4).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.11',  command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.10',  command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.9',   command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
@@ -582,6 +589,7 @@ def Minecraft_Forge_6():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
+    ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_5).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.8', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.7', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.6', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
@@ -591,6 +599,27 @@ def Minecraft_Forge_6():
 
 #java -jar forge.jar --installServer
 
+def descargar_forge_1_20_2():
+    # URL del archivo a descargar
+    url_archivo = 'https://adfoc.us/serve/sitelinks/?id=271228&url=https://maven.minecraftforge.net/net/minecraftforge/forge/1.20.2-48.1.0/forge-1.20.2-48.1.0-installer.jar'
+    # Nombre con el que se guardará el archivo descargado localmente
+    nombre_local = 'Forge_server_1_20_2.jar'
+    # Nombre del archivo eula
+    nombre_eula = 'eula.txt'
+    # Carpeta donde se guardará el archivo descargado
+    ruta_carpeta = 'Main/MCForge/1.20.2'
+    # Crear la ruta completa donde se guardará el archivo descargado
+    ruta_completa_eula = os.path.join(ruta_carpeta, nombre_eula)
+    # Número de la línea que deseas editar
+    numero_linea = 3
+    # Nuevo contenido para escribir en esa línea
+    nuevo_contenido = 'eula=true'
+    def descargar_ejecutar():
+        descargar_archivo(url_archivo, nombre_local, ruta_carpeta)
+        ejecutar_Forge(ruta_carpeta, nombre_local)
+    #    editar_eula(ruta_completa_eula, numero_linea, nuevo_contenido)
+
+    threading.Thread(target=descargar_ejecutar).start()
 
 
 
@@ -686,6 +715,21 @@ def install_forge( ruta_carpeta, nombre_local):
             subprocess.run(comando, shell=True, cwd=ruta_absoluta)
         except Exception as e:
             print(f"Error al ejecutar el archivo .jar: {e} {ruta_absoluta}")
+
+def ejecutar_Forge( ruta_carpeta, nombre_local):
+        try:
+            # Obtener la ruta absoluta al archivo .jar
+            ruta_absoluta = os.path.abspath(os.path.join(ruta_carpeta))
+
+            # Comando para ejecutar el archivo .jar usando Java
+            comando = f" {nombre_local}"
+
+            # Ejecutar el archivo .jar
+            subprocess.run(comando, shell=True, cwd=ruta_absoluta)
+        except Exception as e:
+            print(f"Error al ejecutar el archivo .jar: {e} {ruta_absoluta}")
+
+
 
 
 # Edita una linea especifica de un archivo a otra linea 
