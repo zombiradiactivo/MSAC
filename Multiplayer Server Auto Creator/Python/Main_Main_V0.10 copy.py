@@ -217,6 +217,9 @@ def Minecraft_Loader():
     # Botones para submenú
     ctk.CTkButton(submenu_frame, text='Minecraft Vanilla', command=Minecraft_Vanilla).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='Minecraft Forge',   command=Minecraft_Forge).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='Minecraft_Forge_ModPack',   command=Minecraft_Forge_ModPack).pack(expand=True, fill='both', padx=5, pady=5)
+
+
 
 def Minecraft_Vanilla():
     for widget in submenu_frame.winfo_children():
@@ -623,10 +626,80 @@ def descargar_forge_1_20_2():
 
 
 
-
+# Define input_nombre_modpack_text en un ámbito más amplio
+input_nombre_modpack_text = None
 
 def Minecraft_Forge_ModPack():
-    sa
+    for widget in submenu_frame.winfo_children():
+        widget.destroy()
+    # Botones para submenú
+    # Crear el rectángulo de texto para ingresar comandos
+    global input_nombre_modpack_text  # Accede a la variable global
+    input_nombre_modpack_text = ctk.CTkText(submenu_frame, height=2, width=20)
+    input_nombre_modpack_text.place(relx=0.5, rely=0.9, anchor='center')
+    input_nombre_modpack_text.bind("<Return>", lambda event: Minecraft_ModPack())
+
+
+
+def Minecraft_ModPack():
+    global input_nombre_modpack_text  # Accede a la variable global
+    nombre_modpack = input_nombre_modpack_text.get()  # Obtener el contenido de texto del widget
+    ruta_destino = f'Main/MCForge/{nombre_modpack}'  # Ruta donde se guardará el servidor descargado
+    print(ruta_destino)
+    descargar_modpack_servidor(nombre_modpack, ruta_destino)
+
+
+def descargar_modpack_servidor(nombre_modpack, ruta_destino):
+    
+    # URL base de CurseForge
+    url_base = 'https://www.curseforge.com/minecraft/modpacks/'
+    
+    # URL completa del modpack
+    url_modpack = f'{url_base}{nombre_modpack}/files/all'
+
+    # Realizar la solicitud GET a la página del modpack
+    response = requests.get(url_modpack)
+
+    # Comprobar si la solicitud fue exitosa
+    if response.status_code == 200:
+        # Encontrar el enlace de descarga del servidor
+        inicio_descarga = response.text.find('serverPackUrl')
+        if inicio_descarga != -1:
+            inicio_url = response.text.find('"', inicio_descarga) + 1
+            fin_url = response.text.find('"', inicio_url)
+            url_servidor = response.text[inicio_url:fin_url]
+
+            # Descargar el archivo del servidor
+            servidor_nombre = os.path.basename(url_servidor)
+            ruta_servidor = os.path.join(ruta_destino, servidor_nombre)
+            with open(ruta_servidor, 'wb') as f:
+                servidor_response = requests.get(url_servidor)
+                f.write(servidor_response.content)
+            print(f'Servidor descargado con éxito en: {ruta_servidor}')
+        else:
+            print('No se pudo encontrar el enlace de descarga del servidor.')
+    else:
+        print('No se pudo conectar a la página del modpack.')
+
+
+# Ejemplo de uso:
+#nombre_modpack = 'rlcraft'  # Nombre del modpack en CurseForge
+#ruta_destino = f'Main/MCForge/{nombre_modpack}'  # Ruta donde se guardará el servidor descargado
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # CPU and RAM progress bars setup
