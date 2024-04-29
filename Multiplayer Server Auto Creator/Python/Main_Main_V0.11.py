@@ -604,9 +604,14 @@ def descargar_forge_1_20_1():
 
     ruta_carpeta = 'Main/MCForge/1.20.1'
     nombre_local = "forge_1.20.1.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.20.1"
+    ejecutable_modificado = "@user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.2.30/win_args.txt %*"
+    ejecutable = "run.bat"
+    java_JDK_22 = "C:\Program Files\Java\jdk-22\bin\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.20.1", ruta_carpeta)
-        install_forge(ruta_carpeta, nombre_local)
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)  
 
     threading.Thread(target=descargar_ejecutar).start()
 
@@ -614,9 +619,14 @@ def descargar_forge_1_19_4():
 
     ruta_carpeta = 'Main/MCForge/1.19.4'
     nombre_local = "forge_1.19.4.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.19.4"
+    ejecutable = "run.bat"
+    ejecutable_modificado = " @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.19.4-45.2.15/win_args.txt %*"
+    java_JDK_22 = "C:\Program Files\Java\jdk-22\bin\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.19.4", ruta_carpeta)
-        install_forge(ruta_carpeta, nombre_local)
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
 def descargar_forge_1_18_2():
@@ -753,6 +763,7 @@ label_ram = ctk.CTkLabel(cpu_ram_frame)
 label_ram.pack()
 
 
+
 #Funcion para descargar un archivo 
 def descargar_archivo(url, nombre_archivo, carpeta):
     try:
@@ -783,7 +794,6 @@ def descargar_archivo(url, nombre_archivo, carpeta):
             print(f"'{nombre_archivo}' ya existe en '{carpeta}', no es necesario descargarlo nuevamente.")
     except requests.RequestException as e:
         print(f"Error de conexión: {e}")
-
 
 
 # Función para descargar un archivo JAR específico de un tipo y categoría con una versión determinada a traves de la API serverjars.com
@@ -825,17 +835,6 @@ def API_SERVERJARS_descargar_jar(type, category, version, carpeta):
         print(f"Error de conexión: {e}")
 
 
-
-
-def borrar_carpeta(ruta_carpeta):
-    try:
-        # Borra la carpeta y su contenido de manera recursiva
-        shutil.rmtree(ruta_carpeta)
-        print(f"Carpeta '{ruta_carpeta}' y su contenido han sido eliminados correctamente.")
-    except OSError as e:
-        print(f"Error al borrar la carpeta '{ruta_carpeta}': {e}")
-
-
 # Ejecuta un archivo .jar en una carpeta 
 def ejecutar_jar(ruta_carpeta, nombre_local):
         try:
@@ -849,6 +848,31 @@ def ejecutar_jar(ruta_carpeta, nombre_local):
             subprocess.run(comando, shell=True, cwd=ruta_absoluta)
         except Exception as e:
             print(f"Error al ejecutar el archivo .jar: {e} {ruta_absoluta}")
+
+
+
+# Decide si descargar, instalar o ejecutar el servidor forge dependiendo de los contenidos de la carpeta
+def download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version):
+    try:
+        # Verificar si el archivo .jar ya está descargado
+        ruta_absoluta = os.path.abspath(os.path.join(ruta_carpeta, nombre_local))
+        if not os.path.exists(ruta_absoluta):
+            print("Descargando servidor Forge...")
+            API_SERVERJARS_descargar_jar(type, category, version, ruta_carpeta)
+
+        # Verificar si el servidor ya está instalado
+        if not os.path.exists(ejecutable):
+            print("Instalando servidor Forge...")
+            install_forge(ruta_carpeta, nombre_local)
+
+        # Ejecutar el servidor
+        print("Ejecutando servidor Forge...")
+        subprocess.run(f"{java_JDK_22}{ejecutable_modificado}", shell=True, cwd=ruta_carpeta)
+
+    except Exception as e:
+        print(f"Error al gestionar el servidor Forge: {e}")
+
+
 
 # Instalar el servidor forge en una carpeta 
 def install_forge(ruta_carpeta, nombre_local):
@@ -865,20 +889,29 @@ def install_forge(ruta_carpeta, nombre_local):
         print(f"Error al ejecutar el archivo .jar: {e} {ruta_absoluta}")
 
 
-def ejecutar_Forge(ruta_carpeta, nombre_local):
-        try:
-            # Obtener la ruta absoluta al archivo .jar
-            ruta_absoluta = os.path.abspath(os.path.join(ruta_carpeta))
+#def ejecutar_Forge(ruta_carpeta):
+#        try:
+#            # Obtener la ruta absoluta al archivo .jar
+#            ruta_absoluta = os.path.abspath(os.path.join(ruta_carpeta))
+#
+#            # Comando para ejecutar el archivo .jar usando Java
+#            comando = "run.bat"
+#
+#            # Ejecutar el archivo .jar
+#            subprocess.run(comando, shell=True, cwd=ruta_absoluta)
+#        except Exception as e:
+#            print(f"Error al ejecutar el archivo .jar: {e} {ruta_absoluta}")
 
-            # Comando para ejecutar el archivo .jar usando Java
-            comando = f" {nombre_local}"
-
-            # Ejecutar el archivo .jar
-            subprocess.run(comando, shell=True, cwd=ruta_absoluta)
-        except Exception as e:
-            print(f"Error al ejecutar el archivo .jar: {e} {ruta_absoluta}")
 
 
+
+def borrar_carpeta(ruta_carpeta):
+    try:
+        # Borra la carpeta y su contenido de manera recursiva
+        shutil.rmtree(ruta_carpeta)
+        print(f"Carpeta '{ruta_carpeta}' y su contenido han sido eliminados correctamente.")
+    except OSError as e:
+        print(f"Error al borrar la carpeta '{ruta_carpeta}': {e}")
 
 
 # Edita una linea especifica de un archivo a otra linea 
@@ -916,7 +949,7 @@ def editar_eula(ruta_completa, numero_linea, nuevo_contenido):
 
 
 # Variable global para almacenar el proceso del .jar
-proceso_jar = None
+#proceso_jar = None
 
 
 # Configurar la ejecución del comando al presionar Enter
