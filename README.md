@@ -13,16 +13,17 @@ Características principales:
 
 # Requisitos del sistema:
 
-    Python 3.x
-    Bibliotecas Python adicionales (se pueden instalar mediante pip)
-    Sistema operativo compatible (Windows, Linux esta en desarrolo)
+    Python 3.10
+    Java JDK 22, 21, 17 Y 8
+    Bibliotecas de Python adicionales (se pueden instalar mediante pip)
+    Sistema operativo compatible (Windows)
 
 # Instalación y uso:
 
     Clona o descarga el repositorio desde GitHub.
-    Instala las dependencias utilizando pip.
-    Ejecuta la aplicación y utiliza la interfaz gráfica de usuario para administrar los servidores.
+    Instala las dependencias utilizando "pip install requisitos.txt".
+    Ejecuta la aplicación.
 
 # Licencia:
 
-Este proyecto está licenciado bajo la Licencia MIT. Consulta el archivo LICENSE para obtener más detalles
+Este proyecto está licenciado bajo la Licencia MIT.
