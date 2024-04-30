@@ -633,100 +633,155 @@ def descargar_forge_1_18_2():
 
     ruta_carpeta = 'Main/MCForge/1.18.2'
     nombre_local = "forge_1.18.2.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.18.2"
+    ejecutable = "run.bat"
+    ejecutable_modificado = " @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.18.2-40.2.18/win_args.txt %*"
+    java_JDK_22 = "C:\Program Files\Java\jdk-22\bin\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.18.2", ruta_carpeta)
-        install_forge(ruta_carpeta, nombre_local)
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
 def descargar_forge_1_17_1():
 
     ruta_carpeta = 'Main/MCForge/1.17.1'
     nombre_local = "forge_1.17.1.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.17.1"
+    ejecutable = "run.bat"
+    ejecutable_modificado = " @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.17.1-45.2.15/win_args.txt %*"
+    java_JDK_22 = "C:\Program Files\Java\jdk-22\bin\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.17.1", ruta_carpeta)
-        install_forge(ruta_carpeta, nombre_local)
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
 def descargar_forge_1_16_5():
 
     ruta_carpeta = 'Main/MCForge/1.16.5'
     nombre_local = "forge_1.16.5.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.16.5"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = ""
+    java_JDK_22 = "C:\Program Files\Java\jdk-22\bin\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.16.5", ruta_carpeta)
-        install_forge(ruta_carpeta, nombre_local)
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
 def descargar_forge_1_15_2():
 
     ruta_carpeta = 'Main/MCForge/1.15.2'
     nombre_local = "forge_1.15.2.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.15.2"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.15.2", ruta_carpeta)
-        install_forge(ruta_carpeta, nombre_local)
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
 def descargar_forge_1_14_4():
 
     ruta_carpeta = 'Main/MCForge/1.14.4'
     nombre_local = "forge_1.14.4.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.14.4"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = ""
+    java_JDK_22 = "C:\Program Files\Java\jdk-22\bin\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.14.4", ruta_carpeta)
-        install_forge(ruta_carpeta, nombre_local)
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
 def descargar_forge_1_13_2():
 
     ruta_carpeta = 'Main/MCForge/1.13.2'
     nombre_local = "forge_1.13.2.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.13.2"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = ""
+    java_JDK_22 = "C:\Program Files\Java\jdk-22\bin\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.13.2", ruta_carpeta)
-        install_forge(ruta_carpeta, nombre_local)
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
 def descargar_forge_1_12_2():
 
     ruta_carpeta = 'Main/MCForge/1.12.2'
     nombre_local = "forge_1.12.2.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.12.2"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = ""
+    java_JDK_22 = "C:\Program Files\Java\jdk-22\bin\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.12.2", ruta_carpeta)
-        install_forge(ruta_carpeta, nombre_local)
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
 def descargar_forge_1_11_2():
 
     ruta_carpeta = 'Main/MCForge/1.11.2'
     nombre_local = "forge_1.11.2.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.11.2"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = ""
+    java_JDK_22 = "C:\Program Files\Java\jdk-22\bin\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.11.2", ruta_carpeta)
-        install_forge(ruta_carpeta, nombre_local)
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
 def descargar_forge_1_10_2():
 
     ruta_carpeta = 'Main/MCForge/1.10.2'
     nombre_local = "forge_1.10.2.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.10.2"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = ""
+    java_JDK_22 = "C:\Program Files\Java\jdk-22\bin\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.10.2", ruta_carpeta)
-        install_forge(ruta_carpeta, nombre_local)
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
 def descargar_forge_1_9_4():
 
     ruta_carpeta = 'Main/MCForge/1.9.4'
     nombre_local = "forge_1.9.4.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.9.4"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = ""
+    java_JDK_22 = "C:\Program Files\Java\jdk-22\bin\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.9.4", ruta_carpeta)
-        install_forge(ruta_carpeta, nombre_local)
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
 
 def descargar_forge_1_00_0():
 
     ruta_carpeta = 'Main/MCForge/1.00.0'
-
+    nombre_local = "forge_1.00.0.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.00.0"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = " @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.00.0-45.2.15/win_args.txt %*"
+    java_JDK_22 = "C:\Program Files\Java\jdk-22\bin\javaw.exe"
     def descargar_ejecutar():
-        API_SERVERJARS_descargar_jar("modded", "forge", "1.00.0", ruta_carpeta)
-
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
 
@@ -856,18 +911,24 @@ def download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutabl
     try:
         # Verificar si el archivo .jar ya está descargado
         ruta_absoluta = os.path.abspath(os.path.join(ruta_carpeta, nombre_local))
+        print (ruta_absoluta)
         if not os.path.exists(ruta_absoluta):
             print("Descargando servidor Forge...")
             API_SERVERJARS_descargar_jar(type, category, version, ruta_carpeta)
 
         # Verificar si el servidor ya está instalado
-        if not os.path.exists(ejecutable):
+
+        ruta_ejecutable = os.path.abspath(os.path.join(ruta_carpeta, ejecutable))
+        print(ruta_ejecutable)
+        if not os.path.exists(ruta_ejecutable):
             print("Instalando servidor Forge...")
             install_forge(ruta_carpeta, nombre_local)
+            first_run_forge(ruta_carpeta)
+            editar_eula(ruta_carpeta)
 
         # Ejecutar el servidor
         print("Ejecutando servidor Forge...")
-        subprocess.run(f"{java_JDK_22}{ejecutable_modificado}", shell=True, cwd=ruta_carpeta)
+        subprocess.run(f'"{java_JDK_22}" {ejecutable_modificado}', shell=True, cwd=ruta_carpeta)
 
     except Exception as e:
         print(f"Error al gestionar el servidor Forge: {e}")
@@ -889,21 +950,15 @@ def install_forge(ruta_carpeta, nombre_local):
         print(f"Error al ejecutar el archivo .jar: {e} {ruta_absoluta}")
 
 
-#def ejecutar_Forge(ruta_carpeta):
-#        try:
-#            # Obtener la ruta absoluta al archivo .jar
-#            ruta_absoluta = os.path.abspath(os.path.join(ruta_carpeta))
-#
-#            # Comando para ejecutar el archivo .jar usando Java
-#            comando = "run.bat"
-#
-#            # Ejecutar el archivo .jar
-#            subprocess.run(comando, shell=True, cwd=ruta_absoluta)
-#        except Exception as e:
-#            print(f"Error al ejecutar el archivo .jar: {e} {ruta_absoluta}")
-
-
-
+def first_run_forge(ruta_carpeta, version):
+    nombre_eula = 'eula.txt'
+    ruta_completa = os.path.join(ruta_carpeta, nombre_eula)
+    try:
+        if not os.path.exists(ruta_completa):
+            print("El archivo Eula no existe")
+            subprocess.run(f"minecraft_server.{version}.jar", shell=True, cwd=ruta_carpeta)
+    except Exception as e:
+        print(f"Error al gestionar el servidor Forge: {e}")
 
 def borrar_carpeta(ruta_carpeta):
     try:
@@ -915,7 +970,11 @@ def borrar_carpeta(ruta_carpeta):
 
 
 # Edita una linea especifica de un archivo a otra linea 
-def editar_eula(ruta_completa, numero_linea, nuevo_contenido):
+def editar_eula(ruta_carpeta):
+    nombre_eula = 'eula.txt'
+    numero_linea = "3"
+    nuevo_contenido = "eula=true"
+    ruta_completa = os.path.join(ruta_carpeta, nombre_eula)
     try:
         with open(ruta_completa, 'r') as archivo:
             lineas = archivo.readlines()
