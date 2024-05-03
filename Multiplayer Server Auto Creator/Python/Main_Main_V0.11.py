@@ -9,7 +9,7 @@ import subprocess
 import requests
 import threading
 import shutil
-from py7zr import unpack_7zarchive 
+import zipfile
 
 
 # Window setup
@@ -542,9 +542,12 @@ def Minecraft_Forge():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
-    ctk.CTkButton(submenu_frame, text='1.20.1', command=descargar_forge_1_20_1).pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_20_1 = ctk.CTkButton(submenu_frame, text='1.20.1', command=descargar_forge_1_20_1)
+    boton_forge_1_20_1.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_20_1.bind("<Button-3>", lambda event, version="1.20.1": click_derecho(event, version))
     ctk.CTkButton(submenu_frame, text='1.19.4', command=descargar_forge_1_19_4).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.18.2', command=descargar_forge_1_18_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.17.1', command=descargar_forge_1_17_1).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Forge_2).pack(expand=True, fill='both', padx=5, pady=5)
     
 def Minecraft_Forge_2():
@@ -552,9 +555,9 @@ def Minecraft_Forge_2():
         widget.destroy()
     # Botones para submenú
     ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.17.1', command=descargar_forge_1_17_1).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.16.5', command=descargar_forge_1_16_5).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.15.2', command=descargar_forge_1_15_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.14.4', command=descargar_forge_1_14_4).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Forge_3).pack(expand=True, fill='both', padx=5, pady=5)
 
 def Minecraft_Forge_3():
@@ -562,9 +565,9 @@ def Minecraft_Forge_3():
         widget.destroy()
     # Botones para submenú
     ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.14.4', command=descargar_forge_1_14_4).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.13.2', command=descargar_forge_1_13_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.12.2', command=descargar_forge_1_12_2).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.11.2', command=descargar_forge_1_11_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Forge_4).pack(expand=True, fill='both', padx=5, pady=5)
 
 def Minecraft_Forge_4():
@@ -572,9 +575,9 @@ def Minecraft_Forge_4():
         widget.destroy()
     # Botones para submenú
     ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_3).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.11.2', command=descargar_forge_1_11_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.10.2', command=descargar_forge_1_10_2).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='1.9.4',  command=descargar_forge_1_9_4).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.8.9',  command=descargar_forge_1_8_9).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Forge_5).pack(expand=True, fill='both', padx=5, pady=5)
 
 def Minecraft_Forge_5():
@@ -582,24 +585,39 @@ def Minecraft_Forge_5():
         widget.destroy()
     # Botones para submenú
     ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_4).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.8',    command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.7',    command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.6',    command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Forge_6).pack(expand=True, fill='both', padx=5, pady=5)
-
-def Minecraft_Forge_6():
-    for widget in submenu_frame.winfo_children():
-        widget.destroy()
-    # Botones para submenú
-    ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_5).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.5', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.4', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.3', command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
-
+    ctk.CTkButton(submenu_frame, text='1.7.10', command=descargar_forge_1_7_10).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.6.4',  command=descargar_forge_1_6_4).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='1.5.2',  command=descargar_forge_1_5_2).pack(expand=True, fill='both', padx=5, pady=5)
 
 
 
 #java -jar forge.jar --installServer
+
+def click_derecho(event, version):
+    for widget in submenu_frame.winfo_children():
+        widget.destroy()
+    # Botones para submenú
+    ctk.CTkButton(submenu_frame, text='Editar server.propeties',  command=lambda: (editar_server_propeties(version))).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='Editar uso de RAM', command=lambda: (editar_RAM(version))).pack(expand=True, fill='both', padx=5, pady=5)
+
+
+def editar_server_propeties(version):
+    
+    print("Editando server.propeties")
+
+def editar_RAM(version):
+    
+    print("Editando ram")
+
+
+def descargar_java_boton():
+    def descargar_java():
+        descargar_java_jdk_22()
+
+    threading.Thread(target=descargar_java).start()
+
+
+
 
 def descargar_forge_1_20_1():
 
@@ -610,8 +628,9 @@ def descargar_forge_1_20_1():
     version = "1.20.1"
     ejecutable_modificado = "@user_jvm_args.txt @libraries/net/minecraftforge/forge/1.20.1-47.2.30/win_args.txt %*"
     ejecutable = "run.bat"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)  
 
     threading.Thread(target=descargar_ejecutar).start()
@@ -625,8 +644,9 @@ def descargar_forge_1_19_4():
     version = "1.19.4"
     ejecutable = "run.bat"
     ejecutable_modificado = " @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.19.4-45.2.15/win_args.txt %*"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
@@ -639,8 +659,9 @@ def descargar_forge_1_18_2():
     version = "1.18.2"
     ejecutable = "run.bat"
     ejecutable_modificado = " @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.18.2-40.2.18/win_args.txt %*"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
@@ -653,8 +674,9 @@ def descargar_forge_1_17_1():
     version = "1.17.1"
     ejecutable = "run.bat"
     ejecutable_modificado = " @user_jvm_args.txt @libraries/net/minecraftforge/forge/1.17.1-45.2.15/win_args.txt %*"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
@@ -667,8 +689,9 @@ def descargar_forge_1_16_5():
     version = "1.16.5"
     ejecutable = f"minecraft_server.{version}.jar"
     ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
@@ -681,8 +704,9 @@ def descargar_forge_1_15_2():
     version = "1.15.2"
     ejecutable = f"minecraft_server.{version}.jar"
     ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
@@ -695,8 +719,9 @@ def descargar_forge_1_14_4():
     version = "1.14.4"
     ejecutable = f"minecraft_server.{version}.jar"
     ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
@@ -709,8 +734,9 @@ def descargar_forge_1_13_2():
     version = "1.13.2"
     ejecutable = f"minecraft_server.{version}.jar"
     ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
@@ -723,8 +749,9 @@ def descargar_forge_1_12_2():
     version = "1.12.2"
     ejecutable = f"minecraft_server.{version}.jar"
     ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
@@ -737,8 +764,9 @@ def descargar_forge_1_11_2():
     version = "1.11.2"
     ejecutable = f"minecraft_server.{version}.jar"
     ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
@@ -751,8 +779,9 @@ def descargar_forge_1_10_2():
     version = "1.10.2"
     ejecutable = f"minecraft_server.{version}.jar"
     ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
@@ -765,8 +794,69 @@ def descargar_forge_1_9_4():
     version = "1.9.4"
     ejecutable = f"minecraft_server.{version}.jar"
     ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
+    threading.Thread(target=descargar_ejecutar).start()
+
+def descargar_forge_1_8_9():
+
+    ruta_carpeta = 'Main/MCForge/1.8.9'
+    nombre_local = "forge_1.8.9.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.8.9"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
+    def descargar_ejecutar():
+        descargar_java_jdk_22()
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
+    threading.Thread(target=descargar_ejecutar).start()
+
+def descargar_forge_1_7_10():
+
+    ruta_carpeta = 'Main/MCForge/1.7.10'
+    nombre_local = "forge_1.7.10.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.7.10"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
+    def descargar_ejecutar():
+        descargar_java_jdk_22()
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
+    threading.Thread(target=descargar_ejecutar).start()
+
+def descargar_forge_1_6_4():
+
+    ruta_carpeta = 'Main/MCForge/1.6.4'
+    nombre_local = "forge_1.6.4.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.6.4"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
+    def descargar_ejecutar():
+        descargar_java_jdk_22()
+        download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
+    threading.Thread(target=descargar_ejecutar).start()
+
+def descargar_forge_1_5_2():
+
+    ruta_carpeta = 'Main/MCForge/1.5.2'
+    nombre_local = "forge_1.5.2.jar"
+    type = "modded"
+    category = "forge"
+    version = "1.5.2"
+    ejecutable = f"minecraft_server.{version}.jar"
+    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
+    def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
 
@@ -780,19 +870,11 @@ def descargar_forge_template():
     version = "1.00.0"
     ejecutable = f"minecraft_server.{version}.jar"
     ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
-    java_JDK_22 = "C:\\Program Files\\Java\\jdk-22\\bin\\javaw.exe"
+    java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
+        descargar_java_jdk_22()
         download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version)    
     threading.Thread(target=descargar_ejecutar).start()
-
-
-
-
-
-
-
-
-
 
 
 
@@ -820,7 +902,6 @@ label_ram.pack()
 
 
 
-#Funcion para descargar un archivo 
 def descargar_archivo(url, nombre_archivo, carpeta):
     try:
         if not os.path.exists(carpeta):
@@ -891,7 +972,6 @@ def API_SERVERJARS_descargar_jar(type, category, version, carpeta):
         print(f"Error de conexión: {e}")
 
 
-# Ejecuta un archivo .jar en una carpeta 
 def ejecutar_jar(ruta_carpeta, nombre_local):
         try:
             # Obtener la ruta absoluta al archivo .jar
@@ -906,8 +986,6 @@ def ejecutar_jar(ruta_carpeta, nombre_local):
             print(f"Error al ejecutar el archivo .jar: {e} {ruta_absoluta}")
 
 
-
-# Decide si descargar, instalar o ejecutar el servidor forge dependiendo de los contenidos de la carpeta
 def download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutable_modificado, java_JDK_22, type, category, version):
     try:
 
@@ -929,9 +1007,8 @@ def download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutabl
 
         if not os.path.exists(ruta_eula):
             print("First RUN AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA...")
-            first_run_forge(ruta_carpeta, version, ejecutable)      #Ejecuta .jar deja .jar
-            
-        time.sleep(5)
+            first_run_forge(ruta_carpeta, ejecutable, java_JDK_22, ejecutable_modificado)      #Ejecuta .jar deja .jar 
+            time.sleep(5)
 
         print("Editing EULA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA...")
         editar_eula(ruta_carpeta)       # Comprueba si editar o no
@@ -941,7 +1018,9 @@ def download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutabl
         print("Ejecutando servidor Forge...")
         if ejecutable == "run.bat":
             # Comando a ejecutar si el ejecutable es "run.bat"
-            comando = f'"{java_JDK_22}" {ejecutable_modificado}'
+            ruta_java= os.path.abspath(java_JDK_22)
+            print (ruta_java)
+            comando = f'"{ruta_java}" {ejecutable_modificado}'
         else:
             # Comando a ejecutar si el ejecutable no es "run.bat"
             comando = ejecutable
@@ -954,8 +1033,6 @@ def download_install_run_forge(ruta_carpeta, nombre_local, ejecutable, ejecutabl
         print(f"Error al gestionar el servidor Forge: {e}")
 
 
-
-# Instalar el servidor forge en una carpeta 
 def install_forge(ruta_carpeta, nombre_local):
     try:
         # Obtener la ruta absoluta al archivo .jar
@@ -970,15 +1047,27 @@ def install_forge(ruta_carpeta, nombre_local):
         print(f"Error al ejecutar el archivo .jar: {e} {ruta_absoluta}")
 
 
-def first_run_forge(ruta_carpeta, version):
+def first_run_forge(ruta_carpeta, ejecutable, java_JDK_22, ejecutable_modificado):
     nombre_eula = 'eula.txt'
     ruta_completa = os.path.join(ruta_carpeta, nombre_eula)
     try:
         if not os.path.exists(ruta_completa):
-            print("El archivo Eula no existe")
-            subprocess.run(f"minecraft_server.{version}.jar", shell=True, cwd=ruta_carpeta)
+            
+            if ejecutable == "run.bat":
+                # Comando a ejecutar si el ejecutable es "run.bat"
+                comando = f'"{java_JDK_22}" {ejecutable_modificado}'
+            else:
+                # Comando a ejecutar si el ejecutable no es "run.bat"
+                comando = ejecutable
+    
+        try:
+            subprocess.run(comando, shell=True, cwd=ruta_carpeta)
+        except Exception as e:
+            print(f"Error al ejecutar el comando: {e}")
+
     except Exception as e:
         print(f"Error al gestionar el servidor Forge: {e}")
+
 
 def borrar_carpeta(ruta_carpeta):
     try:
@@ -1005,12 +1094,12 @@ def editar_eula(ruta_carpeta):
             print("La tercera línea no es 'eula=true'. Ejecutando acción...")
             # Acción a ejecutar
             
-        # Editar la tercera línea a "eula=true"
-        lineas[numero_linea - 1] = nuevo_contenido + '\n'
+            # Editar la tercera línea a "eula=true"
+            lineas[numero_linea - 1] = nuevo_contenido + '\n'
 
-        with open(ruta_completa, 'w') as archivo:
-            archivo.writelines(lineas)
-        print(f"Línea {numero_linea} editada correctamente.")
+            with open(ruta_completa, 'w') as archivo:
+                archivo.writelines(lineas)
+            print(f"Línea {numero_linea} editada correctamente.")
         
     except FileNotFoundError:
         print(f"No se encontró el archivo {ruta_completa}.")
@@ -1019,54 +1108,53 @@ def editar_eula(ruta_carpeta):
         print(f"Ocurrió un error al editar la línea: {e}")
 
 
+def descargar_java_jdk_22():
+    
+    url_zip = "https://download.oracle.com/java/22/archive/jdk-22_windows-x64_bin.zip"
+    nombre_archivo_zip = "jdk-22_windows-x64_bin.zip"
+    ruta_destino = "Data/Java"
+    javaw = "Data/Java/jdk-22/bin/javaw.exe"
+    ruta_zip = os.path.join(ruta_destino, nombre_archivo_zip)
+    # Comprobar si el archivo ya existe
 
+    try:
+        if not os.path.exists(ruta_destino):
+            os.makedirs(ruta_destino)
+        
+        if not os.path.exists(ruta_zip):
+            with requests.get(url_zip, stream=True) as respuesta:
+                total_size = int(respuesta.headers.get('content-length', 0))
+                chunk_size = 8192  # Tamaño del chunk
+                received_bytes = 0
 
+                with open(ruta_zip, 'wb') as archivo:
+                    progress_bar = ctk.CTkProgressBar(window, orientation='horizontal', mode='determinate')
+                    progress_bar.place(relx=0, rely=1, relwidth=1, anchor='sw')
 
-# Edita una linea especifica de un archivo a otra linea 
-#def editar_eula(ruta_carpeta):
-#    nombre_eula = 'eula.txt'
-#    numero_linea = int(3)
-#    nuevo_contenido = "eula=true"
-#    ruta_completa = os.path.join(ruta_carpeta, nombre_eula)
-#    try:
-#        with open(ruta_completa, 'r') as archivo:
-#            lineas = archivo.readlines()
-#        # Verificar si el número de línea es válido
-#        if 0 < numero_linea <= len(lineas):
-#            lineas[numero_linea - 1] = nuevo_contenido + '\n'
-#
-#            with open(ruta_completa, 'w') as archivo:
-#                archivo.writelines(lineas)
-#            print(f"Línea {numero_linea} editada correctamente.")
-#        else:
-#            print(f"El número de línea {numero_linea} no es válido para este archivo.")
-#    except FileNotFoundError:
-#        print(f"No se encontró el archivo {ruta_completa}.")
-#    except Exception as e:
-#        print(f"Ocurrió un error al editar la línea: {e}")
+                    for data in respuesta.iter_content(chunk_size=chunk_size):
+                        received_bytes += len(data)
+                        archivo.write(data)
+                        if total_size > 0:
+                            percent_complete = received_bytes / total_size * 100
+                            # Actualizar la barra de progreso cada 5%
+                            if percent_complete % 5 == 0:
+                                print(f"Descargado: {percent_complete:.2f}%")
+                                progress_bar.destroy()
 
+        if not os.path.exists(javaw):
+            # Descomprimir el archivo ZIP
+            with zipfile.ZipFile(nombre_archivo_zip, 'r') as zip_ref:
+                zip_ref.extractall(ruta_destino)
+                os.remove(nombre_archivo_zip)
 
-#def ejecutar_comando(event=None):
-#    comando = input_command_text.get("1.0", "end-1c")  # Obtener el texto del rectángulo de texto
-#    if comando.strip():  # Verificar si el comando no está vacío
-#        enviar_comando_al_jar(comando)
-#    input_command_text.delete("1.0", "end")  # Borrar el texto del rectángulo de texto
-
-
-# Función para enviar el comando al .jar
-#def enviar_comando_al_jar(comando):
-#    if proceso_jar:
-#        proceso_jar.stdin.write((comando + '\n').encode())
-#        proceso_jar.stdin.flush()
-
-
-# Variable global para almacenar el proceso del .jar
-#proceso_jar = None
-
-
-# Configurar la ejecución del comando al presionar Enter
-# input_command_text.bind("<Return>", ejecutar_comando)
-
+            print(f"Descarga de '{nombre_archivo_zip}' completada en '{ruta_destino}'")
+        else:
+            print(f"'{nombre_archivo_zip}' ya existe en '{ruta_destino}', no es necesario descargarlo nuevamente.")
+    except requests.RequestException as e:
+        print(f"Error de conexión: {e}")
+ 
+ 
+ 
 
 # Start updating progress bars
 update_progress_bars()
