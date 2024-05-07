@@ -535,20 +535,32 @@ def Minecraft_Forge():
     # Botones para submenú
     boton_forge_1_20_1 = ctk.CTkButton(submenu_frame, text='1.20.1', command=descargar_forge_1_20_1)
     boton_forge_1_20_1.pack(expand=True, fill='both', padx=5, pady=5)
-    boton_forge_1_20_1.bind("<Button-3>", lambda event, version="1.20.1": click_derecho(event, version))
-    ctk.CTkButton(submenu_frame, text='1.19.4', command=descargar_forge_1_19_4).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.18.2', command=descargar_forge_1_18_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.17.1', command=descargar_forge_1_17_1).pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_20_1.bind("<Button-3>", lambda event, version="1.20.1": click_derecho_forge(event, version))
+    boton_forge_1_19_4 = ctk.CTkButton(submenu_frame, text='1.19.4', command=descargar_forge_1_19_4)
+    boton_forge_1_19_4.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_19_4.bind("<Button-3>", lambda event, version="1.19.4": click_derecho_forge(event, version))
+    boton_forge_1_18_2 = ctk.CTkButton(submenu_frame, text='1.18.2', command=descargar_forge_1_18_2)
+    boton_forge_1_18_2.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_18_2.bind("<Button-3>", lambda event, version="1.18.2": click_derecho_forge(event, version))
+    boton_forge_1_17_1 = ctk.CTkButton(submenu_frame, text='1.17.1', command=descargar_forge_1_17_1)
+    boton_forge_1_17_1.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_17_1.bind("<Button-3>", lambda event, version="1.17.1": click_derecho_forge(event, version))
     ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Forge_2).pack(expand=True, fill='both', padx=5, pady=5)
-    
+
 def Minecraft_Forge_2():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
     ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.16.5', command=descargar_forge_1_16_5).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.15.2', command=descargar_forge_1_15_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.14.4', command=descargar_forge_1_14_4).pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_16_5 = ctk.CTkButton(submenu_frame, text='1.16.5', command=descargar_forge_1_16_5)
+    boton_forge_1_16_5.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_16_5.bind("<Button-3>", lambda event, version="1.16.5": click_derecho_forge(event, version))
+    boton_forge_1_15_2 = ctk.CTkButton(submenu_frame, text='1.15.2', command=descargar_forge_1_15_2)
+    boton_forge_1_15_2.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_15_2.bind("<Button-3>", lambda event, version="1.15.2": click_derecho_forge(event, version))
+    boton_forge_1_14_4 = ctk.CTkButton(submenu_frame, text='1.14.4', command=descargar_forge_1_14_4)
+    boton_forge_1_14_4.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_14_4.bind("<Button-3>", lambda event, version="1.14.4": click_derecho_forge(event, version))
     ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Forge_3).pack(expand=True, fill='both', padx=5, pady=5)
 
 def Minecraft_Forge_3():
@@ -556,9 +568,15 @@ def Minecraft_Forge_3():
         widget.destroy()
     # Botones para submenú
     ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.13.2', command=descargar_forge_1_13_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.12.2', command=descargar_forge_1_12_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.11.2', command=descargar_forge_1_11_2).pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_13_2 = ctk.CTkButton(submenu_frame, text='1.13.2', command=descargar_forge_1_13_2)
+    boton_forge_1_13_2.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_13_2.bind("<Button-3>", lambda event, version="1.13.2": click_derecho_forge(event, version))
+    boton_forge_1_12_2 = ctk.CTkButton(submenu_frame, text='1.12.2', command=descargar_forge_1_12_2)
+    boton_forge_1_12_2.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_12_2.bind("<Button-3>", lambda event, version="1.12.2": click_derecho_forge(event, version))
+    boton_forge_1_11_2 = ctk.CTkButton(submenu_frame, text='1.11.2', command=descargar_forge_1_11_2)
+    boton_forge_1_11_2.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_11_2.bind("<Button-3>", lambda event, version="1.11.2": click_derecho_forge(event, version))
     ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Forge_4).pack(expand=True, fill='both', padx=5, pady=5)
 
 def Minecraft_Forge_4():
@@ -566,9 +584,15 @@ def Minecraft_Forge_4():
         widget.destroy()
     # Botones para submenú
     ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_3).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.10.2', command=descargar_forge_1_10_2).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.9.4',  command=descargar_forge_1_9_4).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.8.9',  command=descargar_forge_1_8_9).pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_10_2 = ctk.CTkButton(submenu_frame, text='1.10.2', command=descargar_forge_1_10_2)
+    boton_forge_1_10_2.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_10_2.bind("<Button-3>", lambda event, version="1.10.2": click_derecho_forge(event, version))
+    boton_forge_1_9_4 = ctk.CTkButton(submenu_frame, text='1.9.4',  command=descargar_forge_1_9_4)
+    boton_forge_1_9_4.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_9_4.bind("<Button-3>", lambda event, version="1.9.4": click_derecho_forge(event, version))
+    boton_forge_1_8_9 = ctk.CTkButton(submenu_frame, text='1.8.9',  command=descargar_forge_1_8_9)
+    boton_forge_1_8_9.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_8_9.bind("<Button-3>", lambda event, version="1.8.9": click_derecho_forge(event, version))
     ctk.CTkButton(submenu_frame, text='Older',  command=Minecraft_Forge_5).pack(expand=True, fill='both', padx=5, pady=5)
 
 def Minecraft_Forge_5():
@@ -576,28 +600,72 @@ def Minecraft_Forge_5():
         widget.destroy()
     # Botones para submenú
     ctk.CTkButton(submenu_frame, text='Newer',  command=Minecraft_Forge_4).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.7.10', command=descargar_forge_1_7_10).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.6.4',  command=descargar_forge_1_6_4).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='1.5.2',  command=descargar_forge_1_5_2).pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_7_10 = ctk.CTkButton(submenu_frame, text='1.7.10', command=descargar_forge_1_7_10)
+    boton_forge_1_7_10.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_7_10.bind("<Button-3>", lambda event, version="1.7.10": click_derecho_forge(event, version))
+    boton_forge_1_6_4 = ctk.CTkButton(submenu_frame, text='1.6.4',  command=descargar_forge_1_6_4)
+    boton_forge_1_6_4.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_6_4.bind("<Button-3>", lambda event, version="1.6.4": click_derecho_forge(event, version))
+    boton_forge_1_5_2 = ctk.CTkButton(submenu_frame, text='1.5.2',  command=descargar_forge_1_5_2)
+    boton_forge_1_5_2.pack(expand=True, fill='both', padx=5, pady=5)
+    boton_forge_1_5_2.bind("<Button-3>", lambda event, version="1.5.2": click_derecho_forge(event, version))
 
 
 
-#java -jar forge.jar --installServer
-
-def click_derecho(event, version):
+def click_derecho_forge(event, version):
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
-    ctk.CTkButton(submenu_frame, text='Editar server.propeties',  command=lambda: (editar_server_propeties(version))).pack(expand=True, fill='both', padx=5, pady=5)
-    ctk.CTkButton(submenu_frame, text='Editar uso de RAM', command=lambda: (editar_RAM(version))).pack(expand=True, fill='both', padx=5, pady=5)
+    ctk.CTkButton(submenu_frame, text='Editar server.propeties',  command=lambda: (editar_server_propeties_forge(version))).pack(expand=True, fill='both', padx=5, pady=5)
+    if version in ["1.20.2", "1.19.4", "1.18.2", "1.17.1"]:
+        ctk.CTkButton(submenu_frame, text='Editar uso de RAM', command=lambda: (editar_RAM_forge_user_jvm_args(version))).pack(expand=True, fill='both', padx=5, pady=5)
+    else:
+        Button_Ram = ctk.CTkButton(submenu_frame, text='Editar uso de RAM', command=lambda: (editar_RAM_forge_user_jvm_args(version)))
+        Button_Ram.pack(expand=True, fill='both', padx=5, pady=5)
+        Button_Ram.configure(state="disabled")
 
-
-def editar_server_propeties(version):
+def editar_server_propeties_forge(version):
+    # Ruta del archivo a editar
+    ruta_archivo = f"Main/MCForge/{version}/server.properties"
     
-    print("Editando server.propeties")
+    # Crear una nueva ventana
+    ventana_editor = ctk.CTkToplevel()
+    ventana_editor.title("Editor de server.properties")
+    ventana_editor.geometry('800x400')
 
-def editar_RAM(version):
+    # Crear un área de texto
+    texto_editor = ctk.CTkTextbox(ventana_editor, wrap='word', width=60, height=20)
+    texto_editor.pack(expand=True, fill='both', side='left')
     
+    # Cargar el contenido del archivo en el área de texto
+    try:
+        with open(ruta_archivo, 'r') as archivo:
+            contenido = archivo.read()
+            texto_editor.insert('end', contenido)
+    except FileNotFoundError:
+        contenido = ""
+    
+    # Función para guardar el archivo
+    def guardar():
+        contenido = texto_editor.get("1.0", 'end')
+        guardar_archivo(ruta_archivo, contenido)
+    
+    # Botón para guardar cambios
+    boton_guardar = ctk.CTkButton(ventana_editor, text="Guardar", command=guardar)
+    boton_guardar.pack(side='bottom')
+    
+    # Función para cerrar la ventana
+    def cerrar_ventana():
+        ventana_editor.destroy()
+    
+    # Botón para cerrar la ventana
+    boton_cerrar = ctk.CTkButton(ventana_editor, text="Cerrar", command=cerrar_ventana)
+    boton_cerrar.pack(side='bottom')
+
+def editar_RAM_forge_user_jvm_args(version):
+    
+    # Edita la ram desde la version 1.20.1 hasta 1.17.1
+    ruta_archivo = f"Main/MCForge/{version}/user_jvm_args.txt"
     print("Editando ram")
 
 
@@ -1128,7 +1196,9 @@ def descargar_java_jdk_22():
         print(f"Error de conexión: {e}")
  
  
- 
+def guardar_archivo(ruta_archivo, contenido):
+    with open(ruta_archivo, 'w') as archivo:
+        archivo.write(contenido) 
 
 # Start updating progress bars
 update_progress_bars()
