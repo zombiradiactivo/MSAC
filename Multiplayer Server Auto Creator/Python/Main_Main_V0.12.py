@@ -16,6 +16,7 @@ import zipfile
 window = ctk.CTk()
 window.title('Server Creator')
 window.geometry('800x400')
+window.minsize(800,400)
 
 # Función para actualizar las barras de progreso para el uso de CPU y RAM
 def update_progress_bars():
@@ -65,13 +66,6 @@ sidebar_panel2.place(relx=0.75, rely=0, relwidth=0.2, relheight=0.1)
 # Configuración del submenú
 submenu_frame = ctk.CTkFrame(window)
 submenu_frame.place(relx=0.35, rely=0.2, relwidth=0.3, relheight=0.5)
-
-# Configuración de pestañas
-Tabview = ctk.CTkTabview(window)
-Tabview.place(relx=0.65, rely=0.2, relwidth=0.3, relheight=0.5)
-
-
-tab_1 = Tabview.add("Minecraft")
 
 
 
@@ -611,18 +605,30 @@ def Minecraft_Forge_5():
     boton_forge_1_5_2.bind("<Button-3>", lambda event, version="1.5.2": click_derecho_forge(event, version))
 
 
+# Definir las variables globales
+global Xmx4G
+global Xms4G
+Xmx4G = "-Xmx4G"
+Xms4G = "-Xms4G"
+
 
 def click_derecho_forge(event, version):
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
     ctk.CTkButton(submenu_frame, text='Editar server.propeties',  command=lambda: (editar_server_propeties_forge(version))).pack(expand=True, fill='both', padx=5, pady=5)
-    if version in ["1.20.2", "1.19.4", "1.18.2", "1.17.1"]:
+    if version in ["1.20.1", "1.19.4", "1.18.2", "1.17.1"]:
         ctk.CTkButton(submenu_frame, text='Editar uso de RAM', command=lambda: (editar_RAM_forge_user_jvm_args(version))).pack(expand=True, fill='both', padx=5, pady=5)
     else:
         Button_Ram = ctk.CTkButton(submenu_frame, text='Editar uso de RAM', command=lambda: (editar_RAM_forge_user_jvm_args(version)))
-        Button_Ram.pack(expand=True, fill='both', padx=5, pady=5)
+        Button_Ram.pack(expand=False, fill='both', padx=5, pady=5)
         Button_Ram.configure(state="disabled")
+        def on_slider_change(value):
+            editar_configuracion_de_memoria(f"{value}G")
+
+        slider = ctk.CTkSlider(submenu_frame, from_=4, to=16, number_of_steps=6, width=100, height=10, command=on_slider_change)
+        slider.pack(expand=False, fill='both', padx=5, pady=5)
+        slider.set(4)  
 
 def editar_server_propeties_forge(version):
     # Ruta del archivo a editar
@@ -632,6 +638,7 @@ def editar_server_propeties_forge(version):
     ventana_editor = ctk.CTkToplevel()
     ventana_editor.title("Editor de server.properties")
     ventana_editor.geometry('800x400')
+    ventana_editor.minsize(800,400)
 
     # Crear un área de texto
     texto_editor = ctk.CTkTextbox(ventana_editor, wrap='word', width=60, height=20)
@@ -667,8 +674,50 @@ def editar_RAM_forge_user_jvm_args(version):
     # Edita la ram desde la version 1.20.1 hasta 1.17.1
     ruta_archivo = f"Main/MCForge/{version}/user_jvm_args.txt"
     print("Editando ram")
+    
+    # Crear una nueva ventana
+    ventana_editor = ctk.CTkToplevel()
+    ventana_editor.title("Editor de user_jvm_args")
+    ventana_editor.geometry('800x400')
+    ventana_editor.minsize(800,400)
+
+    # Crear un área de texto
+    texto_editor = ctk.CTkTextbox(ventana_editor, wrap='word', width=60, height=20)
+    texto_editor.pack(expand=True, fill='both', side='left')
+    
+    # Cargar el contenido del archivo en el área de texto
+    try:
+        with open(ruta_archivo, 'r') as archivo:
+            contenido = archivo.read()
+            texto_editor.insert('end', contenido)
+    except FileNotFoundError:
+        contenido = ""
+    
+    # Función para guardar el archivo
+    def guardar():
+        contenido = texto_editor.get("1.0", 'end')
+        guardar_archivo(ruta_archivo, contenido)
+    
+    # Botón para guardar cambios
+    boton_guardar = ctk.CTkButton(ventana_editor, text="Guardar", command=guardar)
+    boton_guardar.pack(side='bottom')
+    
+    # Función para cerrar la ventana
+    def cerrar_ventana():
+        ventana_editor.destroy()
+    
+    # Botón para cerrar la ventana
+    boton_cerrar = ctk.CTkButton(ventana_editor, text="Cerrar", command=cerrar_ventana)
+    boton_cerrar.pack(side='bottom')
 
 
+
+def editar_configuracion_de_memoria(Xmx):
+    global Xmx4G
+    global Xms4G
+    Xmx4G = f"-Xmx{Xmx}"
+    Xms4G = f"-Xms{Xmx}"
+    print(Xms4G)
 def descargar_java_boton():
     def descargar_java():
         descargar_java_jdk_22()
@@ -747,7 +796,10 @@ def descargar_forge_1_16_5():
     category = "forge"
     version = "1.16.5"
     ejecutable = f"minecraft_server.{version}.jar"
-    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    global Xmx4G
+    global Xms4G
+    ejecutable_modificado = f"-jar {ejecutable} {Xmx4G} {Xms4G}"
+    print(ejecutable_modificado)
     java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
         descargar_java_jdk_22()
@@ -762,7 +814,9 @@ def descargar_forge_1_15_2():
     category = "forge"
     version = "1.15.2"
     ejecutable = f"minecraft_server.{version}.jar"
-    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    global Xmx4G
+    global Xms4G
+    ejecutable_modificado = f"-jar {ejecutable} {Xmx4G} {Xms4G}"
     java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
         descargar_java_jdk_22()
@@ -777,7 +831,9 @@ def descargar_forge_1_14_4():
     category = "forge"
     version = "1.14.4"
     ejecutable = f"minecraft_server.{version}.jar"
-    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    global Xmx4G
+    global Xms4G
+    ejecutable_modificado = f"-jar {ejecutable} {Xmx4G} {Xms4G}"
     java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
         descargar_java_jdk_22()
@@ -792,7 +848,9 @@ def descargar_forge_1_13_2():
     category = "forge"
     version = "1.13.2"
     ejecutable = f"minecraft_server.{version}.jar"
-    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    global Xmx4G
+    global Xms4G
+    ejecutable_modificado = f"-jar {ejecutable} {Xmx4G} {Xms4G}"
     java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
         descargar_java_jdk_22()
@@ -807,7 +865,9 @@ def descargar_forge_1_12_2():
     category = "forge"
     version = "1.12.2"
     ejecutable = f"minecraft_server.{version}.jar"
-    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    global Xmx4G
+    global Xms4G
+    ejecutable_modificado = f"-jar {ejecutable} {Xmx4G} {Xms4G}"
     java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
         descargar_java_jdk_22()
@@ -822,7 +882,9 @@ def descargar_forge_1_11_2():
     category = "forge"
     version = "1.11.2"
     ejecutable = f"minecraft_server.{version}.jar"
-    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    global Xmx4G
+    global Xms4G
+    ejecutable_modificado = f"-jar {ejecutable} {Xmx4G} {Xms4G}"
     java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
         descargar_java_jdk_22()
@@ -837,7 +899,9 @@ def descargar_forge_1_10_2():
     category = "forge"
     version = "1.10.2"
     ejecutable = f"minecraft_server.{version}.jar"
-    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    global Xmx4G
+    global Xms4G
+    ejecutable_modificado = f"-jar {ejecutable} {Xmx4G} {Xms4G}"
     java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
         descargar_java_jdk_22()
@@ -852,7 +916,9 @@ def descargar_forge_1_9_4():
     category = "forge"
     version = "1.9.4"
     ejecutable = f"minecraft_server.{version}.jar"
-    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    global Xmx4G
+    global Xms4G
+    ejecutable_modificado = f"-jar {ejecutable} {Xmx4G} {Xms4G}"
     java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
         descargar_java_jdk_22()
@@ -867,7 +933,9 @@ def descargar_forge_1_8_9():
     category = "forge"
     version = "1.8.9"
     ejecutable = f"minecraft_server.{version}.jar"
-    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    global Xmx4G
+    global Xms4G
+    ejecutable_modificado = f"-jar {ejecutable} {Xmx4G} {Xms4G}"
     java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
         descargar_java_jdk_22()
@@ -882,7 +950,9 @@ def descargar_forge_1_7_10():
     category = "forge"
     version = "1.7.10"
     ejecutable = f"minecraft_server.{version}.jar"
-    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    global Xmx4G
+    global Xms4G
+    ejecutable_modificado = f"-jar {ejecutable} {Xmx4G} {Xms4G}"
     java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
         descargar_java_jdk_22()
@@ -897,7 +967,9 @@ def descargar_forge_1_6_4():
     category = "forge"
     version = "1.6.4"
     ejecutable = f"minecraft_server.{version}.jar"
-    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    global Xmx4G
+    global Xms4G
+    ejecutable_modificado = f"-jar {ejecutable} {Xmx4G} {Xms4G}"
     java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
         descargar_java_jdk_22()
@@ -912,7 +984,9 @@ def descargar_forge_1_5_2():
     category = "forge"
     version = "1.5.2"
     ejecutable = f"minecraft_server.{version}.jar"
-    ejecutable_modificado = f"-jar {ejecutable} -Xmx4G -Xms4G"
+    global Xmx4G
+    global Xms4G
+    ejecutable_modificado = f"-jar {ejecutable} {Xmx4G} {Xms4G}"
     java_JDK_22 = "Data\\Java\\jdk-22\\bin\\javaw.exe"
     def descargar_ejecutar():
         descargar_java_jdk_22()
@@ -1185,9 +1259,8 @@ def descargar_java_jdk_22():
 
         if not os.path.exists(javaw):
             # Descomprimir el archivo ZIP
-            with zipfile.ZipFile(nombre_archivo_zip, 'r') as zip_ref:
+            with zipfile.ZipFile(ruta_zip, 'r') as zip_ref:
                 zip_ref.extractall(ruta_destino)
-                os.remove(nombre_archivo_zip)
 
             print(f"Descarga de '{nombre_archivo_zip}' completada en '{ruta_destino}'")
         else:
