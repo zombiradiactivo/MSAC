@@ -38,7 +38,16 @@ bar_ram.pack(expand=True, fill='both', padx=5, pady=5)
 label_ram = ctk.CTkLabel(cpu_ram_frame)
 label_ram.pack()
 
+def cerrar_aplicacion():
+    # Cerrar todos los hilos antes de salir
+    for thread in threads:
+        if thread is not None:
+            thread.join()
+    window.quit()
+window.protocol("WM_DELETE_WINDOW", cerrar_aplicacion)
 
+# Lista para almacenar los hilos
+threads = []
 
 # Función para actualizar las barras de progreso para el uso de CPU y RAM
 def update_progress_bars():
@@ -226,9 +235,17 @@ def Chat_Menu():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
     # Botones para submenú
+    global HOST
+    global PORT 
+    global entry_puerto_chat
+    HOST = '127.0.0.1'
+    PORT = 5555
+
     entry_puerto_chat = ctk.CTkEntry(submenu_frame, validate="key", validatecommand=(window.register(validar_entrada), "%P"))
     entry_puerto_chat.pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='Iniciar Server',   command=Iniciar_Chat_Server).pack(expand=True, fill='both', padx=5, pady=5)
+
+
 
 def validar_entrada(entrada):
     try:
@@ -248,7 +265,9 @@ def validar_entrada(entrada):
     return True
 
 def Iniciar_Chat_Server():
-    threading.Thread(target=Iniciador_Chat_Server).start()
+    server_thread = threading.Thread(target=Iniciador_Chat_Server).start()
+    # Agregar el hilo a la lista de hilos
+    threads.append(server_thread)
 
 def Iniciador_Chat_Server():
     def handle_client(client_socket, address):
@@ -283,8 +302,10 @@ def Iniciador_Chat_Server():
                 clients.remove(client)
 
     # Configuración del servidor
-    HOST = '127.0.0.1'
-    PORT = 5555
+    #HOST = '127.0.0.1'
+    #PORT = 5555
+
+    PORT = int(entry_puerto_chat.get())
 
     # Crear un socket TCP/IP
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -309,6 +330,9 @@ def Iniciador_Chat_Server():
         # Iniciar un hilo para manejar la conexión con el cliente
         client_thread = threading.Thread(target=handle_client, args=(client_socket, address))
         client_thread.start()
+
+        # Agregar el hilo a la lista de hilos
+        threads.append(client_thread)
 
 
 
