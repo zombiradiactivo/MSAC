@@ -181,7 +181,6 @@ def XAMPP_Installer():
         descargar_instalar_xampp()
         #borrar_carpeta(ruta_carpeta_temp)
 
-
 # Funcion para parar el servidor de Apache
 def Apache_Start():
     global Button_Apache
@@ -265,9 +264,6 @@ def Chat_Launcher():
 
 
 
-
-
-
 # Menu de selector del Minecraft Loader (Con o sin Mods) 
 def Minecraft_Loader():
     for widget in submenu_frame.winfo_children():
@@ -276,9 +272,8 @@ def Minecraft_Loader():
     ctk.CTkButton(submenu_frame, text='Minecraft Vanilla', command=Minecraft_Vanilla).pack(expand=True, fill='both', padx=5, pady=5)
     ctk.CTkButton(submenu_frame, text='Minecraft Forge',   command=Minecraft_Forge).pack(expand=True, fill='both', padx=5, pady=5)
 
-
 # Menu Vanilla
-
+#
 def Minecraft_Vanilla():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
@@ -328,7 +323,7 @@ def Minecraft_Vanilla_5():
     ctk.CTkButton(submenu_frame, text='1.9',   command=descargar_1_20_2).pack(expand=True, fill='both', padx=5, pady=5)
 
 # Funciones de los botones del Menu Vanilla 
-
+#
 def descargar_1_20_2():
     # URL del archivo a descargar
     url_archivo = 'https://piston-data.mojang.com/v1/objects/5b868151bd02b41319f54c8d4061b8cae84e665c/server.jar'
@@ -596,7 +591,7 @@ def descargar_1_9_4():
 
 
 # Menu de Forge
-
+#
 def Minecraft_Forge():
     for widget in submenu_frame.winfo_children():
         widget.destroy()
@@ -685,116 +680,6 @@ global Xms4G
 Xmx4G = "-Xmx4G"
 Xms4G = "-Xms4G"
 
-# Funcion que permite el Click derecho el los botones del Menu de Forge 
-def click_derecho_forge(event, version):
-    for widget in submenu_frame.winfo_children():
-        widget.destroy()
-    # Botones para submenú
-    ctk.CTkButton(submenu_frame, text='Editar server.propeties',  command=lambda: (editar_server_propeties_forge(version))).pack(expand=True, fill='both', padx=5, pady=5)
-    if version in ["1.20.1", "1.19.4", "1.18.2", "1.17.1"]:
-        ctk.CTkButton(submenu_frame, text='Editar uso de RAM', command=lambda: (editar_RAM_forge_user_jvm_args(version))).pack(expand=True, fill='both', padx=5, pady=5)
-    else:
-        Button_Ram = ctk.CTkButton(submenu_frame, text='Editar uso de RAM', command=lambda: (editar_RAM_forge_user_jvm_args(version)))
-        Button_Ram.pack(expand=False, fill='both', padx=5, pady=5)
-        Button_Ram.configure(state="disabled")
-        def on_slider_change(value):
-            editar_configuracion_de_memoria(f"{value}G")
-
-        slider = ctk.CTkSlider(submenu_frame, from_=4, to=16, number_of_steps=6, width=100, height=10, command=on_slider_change)
-        slider.pack(expand=False, fill='both', padx=5, pady=5)
-        slider.set(4)  
-
-# Funcion para editar el archivo server.properties que se encarga de la configuracion del servidor como la dificultad del juego, modo de juego, nombre del mundo, semilla del mundo, etc...
-def editar_server_propeties_forge(version):
-    # Ruta del archivo a editar
-    ruta_archivo = f"Main/MCForge/{version}/server.properties"
-    
-    # Crear una nueva ventana
-    ventana_editor = ctk.CTkToplevel()
-    ventana_editor.title("Editor de server.properties")
-    ventana_editor.geometry('800x400')
-    ventana_editor.minsize(800,400)
-
-    # Crear un área de texto
-    texto_editor = ctk.CTkTextbox(ventana_editor, wrap='word', width=60, height=20)
-    texto_editor.pack(expand=True, fill='both', side='left')
-    
-    # Cargar el contenido del archivo en el área de texto
-    try:
-        with open(ruta_archivo, 'r') as archivo:
-            contenido = archivo.read()
-            texto_editor.insert('end', contenido)
-    except FileNotFoundError:
-        contenido = ""
-    
-    # Función para guardar el archivo
-    def guardar():
-        contenido = texto_editor.get("1.0", 'end')
-        guardar_archivo(ruta_archivo, contenido)
-    
-    # Botón para guardar cambios
-    boton_guardar = ctk.CTkButton(ventana_editor, text="Guardar", command=guardar)
-    boton_guardar.pack(side='bottom')
-    
-    # Función para cerrar la ventana
-    def cerrar_ventana():
-        ventana_editor.destroy()
-    
-    # Botón para cerrar la ventana
-    boton_cerrar = ctk.CTkButton(ventana_editor, text="Cerrar", command=cerrar_ventana)
-    boton_cerrar.pack(side='bottom')
-
-# Funcion para editar el archivo user_jvm_args que se encarga de almacenar la cantidad de ram que el servidor usara
-def editar_RAM_forge_user_jvm_args(version):
-    
-    # Edita la ram desde la version 1.20.1 hasta 1.17.1
-    ruta_archivo = f"Main/MCForge/{version}/user_jvm_args.txt"
-    print("Editando ram")
-    
-    # Crear una nueva ventana
-    ventana_editor = ctk.CTkToplevel()
-    ventana_editor.title("Editor de user_jvm_args")
-    ventana_editor.geometry('800x400')
-    ventana_editor.minsize(800,400)
-
-    # Crear un área de texto
-    texto_editor = ctk.CTkTextbox(ventana_editor, wrap='word', width=60, height=20)
-    texto_editor.pack(expand=True, fill='both', side='left')
-    
-    # Cargar el contenido del archivo en el área de texto
-    try:
-        with open(ruta_archivo, 'r') as archivo:
-            contenido = archivo.read()
-            texto_editor.insert('end', contenido)
-    except FileNotFoundError:
-        contenido = ""
-    
-    # Función para guardar el archivo
-    def guardar():
-        contenido = texto_editor.get("1.0", 'end')
-        guardar_archivo(ruta_archivo, contenido)
-    
-    # Botón para guardar cambios
-    boton_guardar = ctk.CTkButton(ventana_editor, text="Guardar", command=guardar)
-    boton_guardar.pack(side='bottom')
-    
-    # Función para cerrar la ventana
-    def cerrar_ventana():
-        ventana_editor.destroy()
-    
-    # Botón para cerrar la ventana
-    boton_cerrar = ctk.CTkButton(ventana_editor, text="Cerrar", command=cerrar_ventana)
-    boton_cerrar.pack(side='bottom')
-
-
-# Funcion para editar la cantidad de memoria que usara el sevidor de forge 
-def editar_configuracion_de_memoria(Xmx):
-    global Xmx4G
-    global Xms4G
-    Xmx4G = f"-Xmx{Xmx}"
-    Xms4G = f"-Xms{Xmx}"
-    print(Xms4G)
-
 # Funcion de testeo para descargar Java
 def descargar_java_boton():
     def descargar_java():
@@ -804,7 +689,7 @@ def descargar_java_boton():
 
 
 # Funciones de los botones del Menu Forge 
-
+#
 def descargar_forge_1_20_1():
 
     ruta_carpeta = 'Main/MCForge/1.20.1'
@@ -1072,6 +957,114 @@ def descargar_forge_1_5_2():
     threading.Thread(target=descargar_ejecutar).start()
 
 
+# Funcion que permite el Click derecho el los botones del Menu de Forge 
+def click_derecho_forge(event, version):
+    for widget in submenu_frame.winfo_children():
+        widget.destroy()
+    # Botones para submenú
+    ctk.CTkButton(submenu_frame, text='Editar server.propeties',  command=lambda: (editar_server_propeties_forge(version))).pack(expand=True, fill='both', padx=5, pady=5)
+    if version in ["1.20.1", "1.19.4", "1.18.2", "1.17.1"]:
+        ctk.CTkButton(submenu_frame, text='Editar uso de RAM', command=lambda: (editar_RAM_forge_user_jvm_args(version))).pack(expand=True, fill='both', padx=5, pady=5)
+    else:
+        Button_Ram = ctk.CTkButton(submenu_frame, text='Editar uso de RAM', command=lambda: (editar_RAM_forge_user_jvm_args(version)))
+        Button_Ram.pack(expand=False, fill='both', padx=5, pady=5)
+        Button_Ram.configure(state="disabled")
+        def on_slider_change(value):
+            editar_configuracion_de_memoria(f"{value}G")
+
+        slider = ctk.CTkSlider(submenu_frame, from_=4, to=16, number_of_steps=6, width=100, height=10, command=on_slider_change)
+        slider.pack(expand=False, fill='both', padx=5, pady=5)
+        slider.set(4)  
+
+# Funcion para editar el archivo server.properties que se encarga de la configuracion del servidor como la dificultad del juego, modo de juego, nombre del mundo, semilla del mundo, etc...
+def editar_server_propeties_forge(version):
+    # Ruta del archivo a editar
+    ruta_archivo = f"Main/MCForge/{version}/server.properties"
+    
+    # Crear una nueva ventana
+    ventana_editor = ctk.CTkToplevel()
+    ventana_editor.title("Editor de server.properties")
+    ventana_editor.geometry('800x400')
+    ventana_editor.minsize(800,400)
+
+    # Crear un área de texto
+    texto_editor = ctk.CTkTextbox(ventana_editor, wrap='word', width=60, height=20)
+    texto_editor.pack(expand=True, fill='both', side='left')
+    
+    # Cargar el contenido del archivo en el área de texto
+    try:
+        with open(ruta_archivo, 'r') as archivo:
+            contenido = archivo.read()
+            texto_editor.insert('end', contenido)
+    except FileNotFoundError:
+        contenido = ""
+    
+    # Función para guardar el archivo
+    def guardar():
+        contenido = texto_editor.get("1.0", 'end')
+        guardar_archivo(ruta_archivo, contenido)
+    
+    # Botón para guardar cambios
+    boton_guardar = ctk.CTkButton(ventana_editor, text="Guardar", command=guardar)
+    boton_guardar.pack(side='bottom')
+    
+    # Función para cerrar la ventana
+    def cerrar_ventana():
+        ventana_editor.destroy()
+    
+    # Botón para cerrar la ventana
+    boton_cerrar = ctk.CTkButton(ventana_editor, text="Cerrar", command=cerrar_ventana)
+    boton_cerrar.pack(side='bottom')
+
+# Funcion para editar el archivo user_jvm_args que se encarga de almacenar la cantidad de ram que el servidor usara
+def editar_RAM_forge_user_jvm_args(version):
+    
+    # Edita la ram desde la version 1.20.1 hasta 1.17.1
+    ruta_archivo = f"Main/MCForge/{version}/user_jvm_args.txt"
+    print("Editando ram")
+    
+    # Crear una nueva ventana
+    ventana_editor = ctk.CTkToplevel()
+    ventana_editor.title("Editor de user_jvm_args")
+    ventana_editor.geometry('800x400')
+    ventana_editor.minsize(800,400)
+
+    # Crear un área de texto
+    texto_editor = ctk.CTkTextbox(ventana_editor, wrap='word', width=60, height=20)
+    texto_editor.pack(expand=True, fill='both', side='left')
+    
+    # Cargar el contenido del archivo en el área de texto
+    try:
+        with open(ruta_archivo, 'r') as archivo:
+            contenido = archivo.read()
+            texto_editor.insert('end', contenido)
+    except FileNotFoundError:
+        contenido = ""
+    
+    # Función para guardar el archivo
+    def guardar():
+        contenido = texto_editor.get("1.0", 'end')
+        guardar_archivo(ruta_archivo, contenido)
+    
+    # Botón para guardar cambios
+    boton_guardar = ctk.CTkButton(ventana_editor, text="Guardar", command=guardar)
+    boton_guardar.pack(side='bottom')
+    
+    # Función para cerrar la ventana
+    def cerrar_ventana():
+        ventana_editor.destroy()
+    
+    # Botón para cerrar la ventana
+    boton_cerrar = ctk.CTkButton(ventana_editor, text="Cerrar", command=cerrar_ventana)
+    boton_cerrar.pack(side='bottom')
+
+# Funcion para editar la cantidad de memoria que usara el sevidor de forge 
+def editar_configuracion_de_memoria(Xmx):
+    global Xmx4G
+    global Xms4G
+    Xmx4G = f"-Xmx{Xmx}"
+    Xms4G = f"-Xms{Xmx}"
+    print(Xms4G)
 
 
 # Funcion para descargar un archivo segun una url dada
