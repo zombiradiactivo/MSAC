@@ -1,3 +1,0 @@
-title=<Chat Test>
-author=<zombiradiactivo>
-orientation=<portrait>
