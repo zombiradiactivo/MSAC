@@ -20,7 +20,7 @@ Características principales:
 # Instalación y uso:
 
     Clona o descarga el repositorio.
-    Instala las dependencias utilizando "pip install -r requisitos.txt".
+    Instala las dependencias utilizando "pip install -r requirements.txt".
     Ejecuta la aplicación.
 
 # Licencia:
