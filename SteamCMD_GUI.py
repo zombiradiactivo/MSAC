@@ -6,6 +6,7 @@ import requests
 import threading
 import subprocess
 import tkinter as tk
+from tkinter.ttk import Combobox
 import customtkinter as ctk
 from tkinter import filedialog
 from tkinter import messagebox
@@ -285,8 +286,8 @@ class SteamCMDApp(ctk.CTk):
         max_players_label = ctk.CTkLabel(network_frame, text="Max Players")
         max_players_label.pack(side='left', padx=5)
         
-        self.max_players_spinbox = ctk.CTkEntry(network_frame)
-        self.max_players_spinbox.pack(side='left', padx=5)
+        self.max_players_entry = ctk.CTkEntry(network_frame)
+        self.max_players_entry.pack(side='left', padx=5)
         
         # UDP Port
         udp_port_label = ctk.CTkLabel(network_frame, text="UDP Port")
@@ -328,11 +329,16 @@ class SteamCMDApp(ctk.CTk):
         launch_frame.place(relx=0.4, rely=0.8, relwidth=0.6, relheight=0.15)
 
         steam_profiles = self.load_profiles()
-        self.profile_combobox = ctk.CTkComboBox(launch_frame, values=[f"{profile['game']} - {profile['name']}" for profile in steam_profiles])
-        self.profile_combobox.pack(side='left', expand=True, padx=5)
-        self.profile_combobox.bind("<<ComboboxSelected>>", self.on_profile_selected)
+        self.full_profile_values = [f"{profile['srcds']} - {profile['game']} - {profile['name']} - {profile['map']} - {profile['network']} - {profile['max_players']} - {profile['udp_port']} - {profile['rcon']} - {profile['is_custom']} - {profile['has_debug']} - {profile['has_sourcetv']} - {profile['has_console']} - {profile['is_insecure']} - {profile['has_disable_bots']} - {profile['has_dev_messages']}" for profile in steam_profiles]
+        display_values = [f"{profile['game']} - {profile['name']}" for profile in steam_profiles]
         
-        self.update_combobox(self.profile_combobox, steam_profiles)
+        self.profile_combobox = ctk.CTkComboBox(
+            launch_frame,
+            values=display_values,
+            command=self.on_profile_selected
+        )
+        self.profile_combobox.pack(side='left', expand=True, padx=5)
+        
 
         profile_save = ctk.CTkButton(launch_frame, text="Save", command=self.save_profile)
         profile_save.pack(side='left', expand=True,padx=5)
@@ -363,12 +369,7 @@ class SteamCMDApp(ctk.CTk):
         if path:
             self.srcds_entry.insert(0, path)
     
-    def add_custom_game(self):
-        custom_game = ctk.CTkInputDialog(text="Enter Custom Game Name", title="Add Custom Game")
-        game_name = custom_game.get_input()
-        if game_name:
-            self.game_combobox.set(game_name)
-            self.game_combobox.configure(values=self.game_combobox.cget("values") + [game_name])
+
 
     def on_game_selected(self, event):
         selected_game = self.game_combobox.get()
@@ -427,7 +428,7 @@ class SteamCMDApp(ctk.CTk):
         server_name = self.server_name_entry.get()
         map_name = self.map_entry.get()
         network = self.get_network_value()
-        max_players = self.max_players_spinbox.get()
+        max_players = self.max_players_entry.get()
         udp_port = self.udp_port_entry.get()
         rcon_password = self.rcon_entry.get()
         
@@ -481,58 +482,43 @@ class SteamCMDApp(ctk.CTk):
             steam_profiles = []
         return steam_profiles
 
-    def update_combobox(self, combobox, steam_profiles):
-        # Actualizar los valores del combobox con los perfiles cargados
-        combobox_values = [f"{profile['srcds']} - {profile['game']} - {profile['name']} - {profile['map']} - {profile['netword']} - {profile['max_players']} - {profile['udp_port']} - {profile['rcon']} - {profile['is_custom']} - {profile['has_debug']} - {profile['has_sourcetv']} - {profile['has_console']} - {profile['is_insecure']} - {profile['has_disable_bots']} - {profile['has_dev_messages']}" for profile in steam_profiles]
-        combobox['values'] = combobox_values
-        
-    def on_profile_selected(self, event):
-        # Obtener el perfil seleccionado del combobox
-        selected_profile = self.profile_combobox.get()
-        srcds, game, name, map, netword, max_players, udp_port, rcon, is_custom, has_debug, has_sourcetv, has_console, is_insecure, has_disable_bots, has_dev_messages  = selected_profile.split(' - ')
-        # Actualizar los campos de entrada con los valores del perfil seleccionado
-        self.srcds_entry.delete(0, ctk.END)
-        self.srcds_entry.insert(0, srcds)
-        self.game_combobox1.set(game)
-        self.server_name_entry.delete(0, ctk.END)
-        self.server_name_entry.insert(0, name)
-        self.map_entry.delete(0, ctk.END)
-        self.map_entry.insert(0, map)
-        self.network_combobox.set(netword)
-        self.max_players_spinbox.delete(0, ctk.END)
-        self.max_players_spinbox.insert(0, max_players)
-        self.udp_port_entry.delete(0, ctk.END)
-        self.udp_port_entry.insert(0, udp_port)
-        self.rcon_entry.delete(0, ctk.END)
-        self.rcon_entry.insert(0, rcon)
-        if is_custom == "1":
-            self.custom_mod_checkbox.select()
-        else:
-            self.custom_mod_checkbox.deselect() 
-        if has_debug == "1":
-            self.debug_mode_checkbox.select()
-        else:
-            self.debug_mode_checkbox.deselect() 
-        if has_sourcetv == "1":
-            self.sourcetv_checkbox.select()
-        else:
-            self.sourcetv_checkbox.deselect() 
-        if has_console == "1":
-            self.console_mode_checkbox.select()
-        else:
-            self.console_mode_checkbox.deselect() 
-        if is_insecure == "1":
-            self.insecure_checkbox.select()
-        else:
-            self.insecure_checkbox.deselect() 
-        if has_disable_bots == "1":
-            self.disable_bots_checkbox.select()
-        else:
-            self.disable_bots_checkbox.deselect() 
-        if has_dev_messages == "1":
-            self.dev_messages_checkbox.select()
-        else:
-            self.dev_messages_checkbox.deselect() 
+    def on_profile_selected(self, selected_value):
+        try:
+            selected_index = self.profile_combobox.cget("values").index(selected_value)
+            selected_profile = self.full_profile_values[selected_index]
+            profile_values = selected_profile.split(' - ')
+    
+            if len(profile_values) != 15:
+                print("Error: Perfil seleccionado no tiene el formato correcto")
+                return
+    
+            # Obtener el perfil seleccionado del combobox
+            srcds, game, name, map, network, max_players, udp_port, rcon, is_custom, has_debug, has_sourcetv, has_console, is_insecure, has_disable_bots, has_dev_messages = profile_values
+            
+            # Actualizar los campos de entrada con los valores del perfil seleccionado
+            self.srcds_entry.delete(0, ctk.END)
+            self.srcds_entry.insert(0, srcds)
+            self.game_combobox1.set(game)
+            self.server_name_entry.delete(0, ctk.END)
+            self.server_name_entry.insert(0, name)
+            self.map_entry.delete(0, ctk.END)
+            self.map_entry.insert(0, map)
+            self.network_combobox.set(network)
+            self.max_players_entry.delete(0, ctk.END)
+            self.max_players_entry.insert(0, max_players)
+            self.udp_port_entry.delete(0, ctk.END)
+            self.udp_port_entry.insert(0, udp_port)
+            self.rcon_entry.delete(0, ctk.END)
+            self.rcon_entry.insert(0, rcon)
+            self.custom_mod_checkbox.select() if is_custom == "1" else self.custom_mod_checkbox.deselect()
+            self.debug_mode_checkbox.select() if has_debug == "1" else self.debug_mode_checkbox.deselect()
+            self.sourcetv_checkbox.select() if has_sourcetv == "1" else self.sourcetv_checkbox.deselect()
+            self.console_mode_checkbox.select() if has_console == "1" else self.console_mode_checkbox.deselect()
+            self.insecure_checkbox.select() if is_insecure == "1" else self.insecure_checkbox.deselect()
+            self.disable_bots_checkbox.select() if has_disable_bots == "1" else self.disable_bots_checkbox.deselect()
+            self.dev_messages_checkbox.select() if has_dev_messages == "1" else self.dev_messages_checkbox.deselect()
+        except ValueError:
+            print("Error: Selección no encontrada en los valores del combobox")
 
     def save_profile(self):
         # Obtener los valores de entrada del usuario y la versión seleccionada
@@ -540,8 +526,8 @@ class SteamCMDApp(ctk.CTk):
         game = self.game_combobox1.get()
         name = self.server_name_entry.get()
         map = self.map_entry.get()
-        netword = self.network_combobox.get()
-        max_players = self.max_players_spinbox.get()
+        network = self.network_combobox.get()
+        max_players = self.max_players_entry.get()
         udp_port = self.udp_port_entry.get()
         rcon = self.rcon_entry.get()
         is_custom = self.custom_mod_checkbox.get()
@@ -558,7 +544,7 @@ class SteamCMDApp(ctk.CTk):
             "game": game,
             "name": name,
             "map": map,
-            "netword": netword,
+            "network": network,
             "max_players": max_players,
             "udp_port": udp_port,
             "rcon": rcon,
