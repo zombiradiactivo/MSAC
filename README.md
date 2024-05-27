@@ -1,9 +1,9 @@
 # Multiplayer Server Auto Creator
 
-Multiplayer Server Auto Creator es una aplicación de escritorio desarrollada en Python que simplifica la gestión y configuración de servidores de juegos en entornos de servidor local. La aplicación ofrece una interfaz gráfica de usuario (GUI) intuitiva que permite a los usuarios iniciar y detener fácilmente servidores como Apache, FileZilla FTP Server y servidores de Minecraft.
+Multiplayer Server Auto Creator es una aplicación de escritorio desarrollada en Python que simplifica la gestión y configuración de servidores. La aplicación ofrece una interfaz gráfica de usuario (GUI) intuitiva que permite a los usuarios iniciar y detener fácilmente servidores como Apache, FileZilla FTP Server, servidores de Minecraft y de Steam.
 Características principales:
 
-    Interfaz gráfica de usuario (GUI) amigable: La GUI intuitiva hace que sea fácil para los usuarios iniciar y detener servidores de juegos con solo unos pocos clics.
+    Interfaz gráfica de usuario (GUI) amigable: La GUI intuitiva hace que sea fácil para los usuarios iniciar y detener servidores con solo unos pocos clics.
 
     Inicio y detención de servidores: La aplicación permite iniciar y detener servidores como Apache, FileZilla FTP Server y servidores de Minecraft de manera rápida y sencilla.
 
@@ -14,13 +14,12 @@ Características principales:
 # Requisitos del sistema:
 
     Python 3.10
-    Java JDK 22, 21, 17 Y 8
     Bibliotecas de Python adicionales (se pueden instalar mediante pip)
     Sistema operativo compatible (Windows)
 
 # Instalación y uso:
 
-    Clona o descarga el repositorio desde GitHub.
+    Clona o descarga el repositorio.
     Instala las dependencias utilizando "pip install requisitos.txt".
     Ejecuta la aplicación.
 
