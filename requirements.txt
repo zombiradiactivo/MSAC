@@ -1,0 +1,7 @@
+tk
+py7zr
+psutil
+requests
+cryptography
+customtkinter
+minecraft_launcher_lib

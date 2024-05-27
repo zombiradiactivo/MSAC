@@ -1,8 +1,0 @@
-customtkinter
-requests
-tk
-psutil
-subprocess
-threading
-shutil
-py7zr
