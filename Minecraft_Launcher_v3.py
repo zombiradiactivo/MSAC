@@ -6,7 +6,6 @@ import subprocess
 import hashlib
 import json
 import uuid
-import sys
 import os
 
 window = ctk.CTk()
