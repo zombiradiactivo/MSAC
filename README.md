@@ -1,3 +1,7 @@
+# Importante 
+
+Esto es un Proyecto es de Final de Curso, no es una aplicacion que se vaya a seguir desarrollando. 
+
 # Multi Server Automatic Creator
 
 Multi Server Automatic Creator es una aplicación de escritorio desarrollada en Python que simplifica la gestión y configuración de servidores. La aplicación ofrece una interfaz gráfica de usuario (GUI) intuitiva que permite a los usuarios iniciar y detener fácilmente servidores como Apache, FileZilla FTP Server, servidores de Minecraft y de Steam.
